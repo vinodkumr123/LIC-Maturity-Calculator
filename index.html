@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LIC Maturity Calculator</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #333;
+        }
+
+        .calculator {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            width: 350px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #2575fc;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus {
+            border-color: #2575fc;
+            outline: none;
+        }
+
+        button {
+            padding: 12px;
+            background-color: #2575fc;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #1a5bbf;
+        }
+
+        .result {
+            margin-top: 25px;
+            font-size: 18px;
+            color: #2575fc;
+            font-weight: bold;
+        }
+
+        .instructions {
+            margin-top: 25px;
+            font-size: 14px;
+            color: #777;
+            text-align: left;
+        }
+
+        .instructions h2 {
+            color: #2575fc;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .instructions p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <h1>LIC Maturity Calculator</h1>
+        <form id="maturityForm">
+            <label for="policyAmount">Policy Amount (₹):</label>
+            <input type="number" id="policyAmount" required>
+
+            <label for="policyTerm">Policy Term (Years):</label>
+            <input type="number" id="policyTerm" required>
+
+            <label for="interestRate">Interest Rate (%):</label>
+            <input type="number" id="interestRate" step="0.01" required>
+
+            <button type="submit">Calculate Maturity Amount</button>
+        </form>
+
+        <div id="result" class="result"></div>
+
+        <div class="instructions">
+            <h2>How to Use:</h2>
+            <p>1. Enter the Policy Amount in Indian Rupees (₹).</p>
+            <p>2. Enter the Policy Term in Years.</p>
+            <p>3. Enter the Interest Rate in Percentage (%).</p>
+            <p>4. Click on "Calculate Maturity Amount" to see the result.</p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('maturityForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const policyAmount = parseFloat(document.getElementById('policyAmount').value);
+            const policyTerm = parseFloat(document.getElementById('policyTerm').value);
+            const interestRate = parseFloat(document.getElementById('interestRate').value);
+
+            const maturityAmount = policyAmount * Math.pow(1 + (interestRate / 100), policyTerm);
+
+            document.getElementById('result').innerText = `Maturity Amount: ₹${maturityAmount.toFixed(2)}`;
+        });
+    </script>
+</body>
+</html>
